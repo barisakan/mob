@@ -5,7 +5,7 @@ namespace Packer;
 
 public class Packer
 {
-
+    
     public static string Pack(string filePath)
     {
         var sb = new StringBuilder();
