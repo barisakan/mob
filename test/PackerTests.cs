@@ -9,7 +9,7 @@ public class PackerTests
     public void ExampleDataTest()
     {
 
-        var expected = File.ReadAllText(@"C:\Workspace\mob\resources\example_output");
+        var expected = File.ReadAllText(@".\data\example_output");
 
         //var packer = Packer.ConfigureWith( new PackerConfiguration
         //{
@@ -19,6 +19,6 @@ public class PackerTests
         //    PrioritizeCostOverWeightPerformance = true
         //});
 
-        Assert.Equal(expected, Packer.Packer.Pack(@"C:\Workspace\mob\resources\example_input"));
+        Assert.Equal(expected, Packer.Packer.Pack(@".\data\example_input"));
     }
 }

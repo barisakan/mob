@@ -12,7 +12,7 @@ public class Package
     {
         if (weight > 100)
         {
-            throw new APIException("Box weight can not be more than 100");
+            throw new APIException(Exceptions.MaxBoxWeigth);
 
         }
         this.weight = weight;
@@ -32,7 +32,7 @@ public class Package
         {
             if (items.Count() == 15)
             {
-                throw new APIException("Maximum 15 items can be evaluated");
+                throw new APIException(Exceptions.MaxItem);
             }
             items.Add(i);
         }
