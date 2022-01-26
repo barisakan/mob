@@ -3,4 +3,5 @@
 .git
 bin
 obj
+coverage
 

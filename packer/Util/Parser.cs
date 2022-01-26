@@ -33,24 +33,32 @@ public class Parser
 
     private static Package ParseLine(string line)
     {
-        var parts = line.Split(':');
-        var weight = double.Parse(parts[0].Trim(), CultureInfo.InvariantCulture);
-
-        var box = new Package(weight);
-
-        var items = parts[1].Trim().Split(' ');
-
-        foreach (var item in items)
+        try
         {
-            var values = item.Replace("(", "").Replace(")", "").Split(',');
+            var parts = line.Split(':');
+            var weight = double.Parse(parts[0].Trim(), CultureInfo.InvariantCulture);
 
-            var idx = int.Parse(values[0]);
-            var itemWeight = double.Parse(values[1], CultureInfo.InvariantCulture);
-            var itemCost = double.Parse(values[2].Replace("€", ""), CultureInfo.InvariantCulture);
+            var box = new Package(weight);
 
-            box.AddItem(new Item(idx, itemWeight, itemCost));
+            var items = parts[1].Trim().Split(' ');
+
+            foreach (var item in items)
+            {
+                var values = item.Replace("(", "").Replace(")", "").Split(',');
+
+                var idx = int.Parse(values[0]);
+                var itemWeight = double.Parse(values[1], CultureInfo.InvariantCulture);
+                var itemCost = double.Parse(values[2].Replace("€", ""), CultureInfo.InvariantCulture);
+
+                box.AddItem(new Item(idx, itemWeight, itemCost));
+            }
+            return box;
         }
-        return box;
+        catch(Exception ex)
+        {
+            throw new APIException(Messages.LineParsingError, ex);
+        }
+        
     }
 
 }

@@ -54,7 +54,7 @@ public class ModelTests
             }
         );
 
-        Assert.Equal(Exceptions.MaxWeight, ex.Message);
+        Assert.Equal(Messages.MaxWeight, ex.Message);
     }
 
 
@@ -71,7 +71,7 @@ public class ModelTests
         }
         );
 
-        Assert.Equal(Exceptions.MaxCost, ex.Message);
+        Assert.Equal(Messages.MaxCost, ex.Message);
     }
 
     [Fact]
@@ -86,7 +86,7 @@ public class ModelTests
         }
         );
 
-        Assert.Equal(Exceptions.MaxBoxWeigth, ex.Message);
+        Assert.Equal(Messages.MaxBoxWeigth, ex.Message);
     }
 
     [Fact]
@@ -109,7 +109,7 @@ public class ModelTests
         }
         );
 
-        Assert.Equal(Exceptions.MaxItem, ex.Message);
+        Assert.Equal(Messages.MaxItem, ex.Message);
     }
 
 
@@ -133,7 +133,7 @@ public class ModelTests
         }
         );
 
-        Assert.Equal(Exceptions.MaxItem, ex.Message);
+        Assert.Equal(Messages.MaxItem, ex.Message);
     }
 
     [Fact]
