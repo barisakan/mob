@@ -12,12 +12,12 @@ public class Item
     {
         if (weight > 100)
         {
-            throw new APIException(Exceptions.MaxWeight);
+            throw new APIException(Messages.MaxWeight);
         }
 
         if (cost > 100)
         {
-            throw new APIException(Exceptions.MaxCost);
+            throw new APIException(Messages.MaxCost);
         }
 
         this.id = id;
