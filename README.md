@@ -39,48 +39,48 @@ Also responsible for initializing configuration object.
 Contains all implementations
 
 #### Util.Parser
-    Parser is responsible for parfing provided file.
-    Firts file is opened and all lines parsed one by one.
+Parser is responsible for parfing provided file.
+Firts file is opened and all lines parsed one by one.
 
-    Exceptions are thrown if parsing is not finished correcty.
-    All exceptions are encapsulated under APIException.
+Exceptions are thrown if parsing is not finished correcty.
+All exceptions are encapsulated under APIException.
 
 ```csharp
     public List<IPackage> Read(string filePath)
 ```
-    I didn't used file stream within using block because I wanted to catch and capsulate system exceptions. So file stream closed manually.
+I didn't used file stream within using block because I wanted to catch and capsulate system exceptions. So file stream closed manually.
 
 ```csharp
    private static Package ParseLine(string line)
 ```
-    Used regular expressin to match items within line string and parsed them.
-    Whole parse operation of a line is within a single try/catch block.
-    I did not distinguish parsing errors. 
+Used regular expressin to match items within line string and parsed them.
+Whole parse operation of a line is within a single try/catch block.
+I did not distinguish parsing errors. 
 
 #### Strategy.Knapsak
 
-    Kanpsak problem solved by dynamic programminc approach 
-    [Knapsak](https://en.wikipedia.org/wiki/Knapsack_problem#Dynamic_programming_in-advance_algorithm)
+Kanpsak problem solved by dynamic programminc approach 
+[Knapsak](https://en.wikipedia.org/wiki/Knapsack_problem#Dynamic_programming_in-advance_algorithm)
 
-    Knapsak object takes iPackage object to make calculations.
-    There are two main parts :
+Knapsak object takes iPackage object to make calculations.
+There are two main parts :
 
-    - Generating solution matrix
-    - Finding selected items from solution matrix.
+- Generating solution matrix
+- Finding selected items from solution matrix.
 
-    __Since weight and costs values are not integers I assumed precision will be double digits (.00) 
-    and multiplied values by 100 before processing.__
+__Since weight and costs values are not integers I assumed precision will be double digits (.00) 
+and multiplied values by 100 before processing.__
 
-    __This increased used memory allocation because my matrix size on weight dimension 
-    increased to 10.000 (when weight is 100)__
+__This increased used memory allocation because my matrix size on weight dimension 
+increased to 10.000 (when weight is 100)__
 
 
 #### Model.Package
 
-    Package object holds items to be packed. 
-    There are two conditions when exception is throwed :
+Package object holds items to be packed. 
+There are two conditions when exception is throwed :
 
-    1 - Constuctor : When package weight exceeds configuration value
+1 - Constuctor : When package weight exceeds configuration value
 ```csharp
     public Package(double weight)
 ```
@@ -91,22 +91,23 @@ Contains all implementations
 
 #### Model.Item
 
-    Items are added to packages. 
-    There are two conditions when exception is throwed :
-    
-    1 - Constuctor : When package weight or cost exceeds configuration value
+Items are added to packages. 
+There are two conditions when exception is throwed :
+
+1 - Constuctor : When package weight or cost exceeds configuration value
 ```csharp
     public Item(int id, double weight, double cost)
 ```
 
 #### Exceptions
 
-    All exceptions are encapsulated within APIException.
-    Also static error messages added to make it easier to track.
+All exceptions are encapsulated within APIException.
+Also static error messages added to make it easier to track.
 
 #### Config.Cfg
-    Holds configuration values and implements singleton pattern.
-    It provides static Instance method to access config instance.
+
+Holds configuration values and implements singleton pattern.
+It provides static Instance method to access config instance.
 
 ```csharp
     public static IConf Instance
@@ -126,7 +127,7 @@ Contains all implementations
 
 #### ListExtensions
 
-    Extension methods are added List<IPackage> type to help more fluent approach.
+Extension methods are added List<IPackage> type to help more fluent approach.
 
 ```csharp
      public static List<IPackage> PackAll(this List<IPackage> packages)
@@ -136,15 +137,15 @@ Contains all implementations
 
 ### test
 
-    Test project tests two component
+Test project tests two component
 
-    1- Api tests
-    Test done by creating file from hard-coded sample data. 
-    I didn't prefer using real files since they are neede to be delivered among sourcode.
+1- Api tests
+Test done by creating file from hard-coded sample data. 
+I didn't prefer using real files since they are neede to be delivered among sourcode.
 
-    2- Model tests
-    Model tests focus on Package and Item objects. 
-    Objects data consistency and business behavours are tested.
+2- Model tests
+Model tests focus on Package and Item objects. 
+Objects data consistency and business behavours are tested.
 
 ### Class Diagram
 
