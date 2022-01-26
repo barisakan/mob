@@ -1,14 +1,15 @@
 ﻿namespace Packer.Model;
 
-public class Package
+public class Package : IPackage
 {
 
     private double weight;
     private List<Item> items;
+    private IConf conf = Conf.Instance;
 
     public Package(double weight)
     {
-        if (weight > 100)
+        if (weight > conf.MaxPackageWeight)
         {
             throw new APIException(Messages.MaxBoxWeigth);
 
@@ -18,11 +19,11 @@ public class Package
     }
 
     public Package(double weight, List<Item> items) : this(weight)
-    {        
+    {
         foreach (var item in items)
         {
             AddItem(item);
-        }        
+        }
     }
 
     public void AddItem(Item i)
@@ -30,7 +31,7 @@ public class Package
         //Items heavier than package capacity are discarded
         if (i.Weight <= weight)
         {
-            if (items.Count() == 15)
+            if (items.Count() == conf.MaxItemCount)
             {
                 throw new APIException(Messages.MaxItem);
             }
@@ -48,9 +49,9 @@ public class Package
 
     public double PackageWeight { get { return weight; } }
 
-    
+
     public override string ToString()
-    {        
+    {
         var str = "";
         var loop = Items.OrderBy(i => i.Id);
         foreach (var item in loop)

@@ -7,15 +7,16 @@ public class Item
     private double cost;
     private double profit;
     private bool selected;
+    private IConf conf = Conf.Instance;
 
     public Item(int id, double weight, double cost)
     {
-        if (weight > 100)
+        if (weight > conf.MaxItemWeight)
         {
             throw new APIException(Messages.MaxWeight);
         }
 
-        if (cost > 100)
+        if (cost > conf.MaxItemCost)
         {
             throw new APIException(Messages.MaxCost);
         }

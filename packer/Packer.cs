@@ -9,6 +9,10 @@ namespace Packer;
 /// </summary>
 public class Packer
 {
+    public static IConf cfg { get; private set; }
+    public static IParser Parser { get; private set; }
+    public static Knapsack Strategy { get; private set; }
+
 
     /// <summary>
     /// </summary>
@@ -19,35 +23,17 @@ public class Packer
     /// </exception>
     public static string Pack(string filePath)
     {
-        var sb = new StringBuilder();
+        cfg = Conf.Instance;
+        
+        Parser = new Parser();
+
+        string result = "";
+        
         try
         {
-            var prs = new Parser(filePath);
-            var records = prs.Read();
+            var packed = PackAll(filePath);
+            result = PrintResults(packed);
 
-            for (int i = 0; i < records.Count; i++)
-            {
-                var record = records[i];    
-
-                var ks = new Knapsack(record.PackageWeight, record.Items);
-                ks.Calculate();
-
-                foreach (var idx in ks.SelectedItems())
-                {
-                    record.Select(idx);
-                }
-
-                if (i+1 == records.Count)
-                {
-                    //lastline does not print newline
-                    sb.Append(record.ToString());
-                }
-                else
-                {
-                    sb.AppendLine(record.ToString());
-                }
-
-            }
         }
         catch (APIException e)
         {
@@ -56,6 +42,40 @@ public class Packer
         catch (Exception e)
         {
             throw new APIException(e);
+        }
+        return result;
+    }
+
+    private static List<IPackage> PackAll(string filePath)
+    {
+        var packages = Parser.Read(filePath);
+
+        foreach (var package in packages) { 
+            
+            var st = new Knapsack(package);
+            st.Calculate();
+        }
+        return packages;
+    }
+
+    private static string PrintResults(List<IPackage> packages)
+    {
+        var sb = new StringBuilder();
+
+        for (int i = 0; i < packages.Count; i++)
+        {
+            var package = packages[i];
+
+            if (i + 1 == packages.Count)
+            {
+                //lastline does not print newline
+                sb.Append(package.ToString());
+            }
+            else
+            {
+                sb.AppendLine(package.ToString());
+            }
+
         }
         return sb.ToString();
     }
