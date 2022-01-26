@@ -4,21 +4,21 @@ public class Package : IPackage
 {
 
     private double weight;
-    private List<Item> items;
+    private List<IItem> items;
     private IConf conf = Conf.Instance;
 
     public Package(double weight)
     {
         if (weight > conf.MaxPackageWeight)
         {
-            throw new APIException(Messages.MaxBoxWeigth);
+            throw new APIException(Messages.MaxPackageWeigth);
 
         }
         this.weight = weight;
-        items = new List<Item>();
+        items = new List<IItem>();
     }
 
-    public Package(double weight, List<Item> items) : this(weight)
+    public Package(double weight, List<IItem> items) : this(weight)
     {
         foreach (var item in items)
         {
@@ -26,7 +26,7 @@ public class Package : IPackage
         }
     }
 
-    public void AddItem(Item i)
+    public void AddItem(IItem i)
     {
         //Items heavier than package capacity are discarded
         if (i.Weight <= weight)
@@ -45,7 +45,7 @@ public class Package : IPackage
         return items.Count();
     }
 
-    public IReadOnlyList<Item> Items { get { return items; } }
+    public IReadOnlyList<IItem> Items { get { return items; } }
 
     public double PackageWeight { get { return weight; } }
 

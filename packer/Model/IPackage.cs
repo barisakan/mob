@@ -3,10 +3,10 @@ namespace Packer.Model
 {
     public interface IPackage
     {
-        IReadOnlyList<Item> Items { get; }
+        IReadOnlyList<IItem> Items { get; }
         double PackageWeight { get; }
 
-        void AddItem(Item i);
+        void AddItem(IItem i);
         int Count();
         void Select(int id);
         string ToString();

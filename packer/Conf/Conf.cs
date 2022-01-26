@@ -1,5 +1,8 @@
 ﻿namespace Packer;
-
+/// <summary>
+/// Holds business rules for domain model.
+/// It can be initiated before accessing singleton instance.
+/// </summary>
 public class Conf : IConf
 {
     private double maxItemCost;
@@ -16,12 +19,12 @@ public class Conf : IConf
         this.maxItemCount = maxItemCount;
     }
 
-    //If not initialized default values are provided
+    //Returns instance of config. If called before initialized it populates default data
     public static IConf Instance
     {
         get
         {
-            if (config == null)
+            if(config == null)
             {
                 config = new Conf(maxItemCost: 100, maxItemWeight: 100, maxPackageWeight: 100, maxItemCount: 15);
             }

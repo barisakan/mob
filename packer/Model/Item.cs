@@ -1,6 +1,6 @@
 ﻿namespace Packer.Model;
 
-public class Item
+public class Item : IItem
 {
     private int id;
     private double weight;
@@ -13,12 +13,12 @@ public class Item
     {
         if (weight > conf.MaxItemWeight)
         {
-            throw new APIException(Messages.MaxWeight);
+            throw new APIException(Messages.MaxItemWeight);
         }
 
         if (cost > conf.MaxItemCost)
         {
-            throw new APIException(Messages.MaxCost);
+            throw new APIException(Messages.MaxItemCost);
         }
 
         this.id = id;

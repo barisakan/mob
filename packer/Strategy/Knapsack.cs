@@ -2,13 +2,13 @@
 
 namespace Packer.Model;
 
-public class Knapsack
+public class Knapsack : IKnapsack
 {
 
     private IPackage package;
 
     private int capacity;
-    private List<Item> items;
+    private List<IItem> items;
     private int itemCount;
     private int[] weights;
     private int[] costs;
@@ -23,7 +23,7 @@ public class Knapsack
         this.package = package;
         this.items = package.Items.OrderByDescending(i => i.Profit).ToList();
 
-        this.capacity = Convert.ToInt32(package.PackageWeight * precision);        
+        this.capacity = Convert.ToInt32(package.PackageWeight * precision);
         this.itemCount = items.Count();
 
 
@@ -75,7 +75,7 @@ public class Knapsack
                 }
             }
         }
-        
+
     }
 
     private void FindSelectedItems()
@@ -83,7 +83,7 @@ public class Knapsack
         int item;
         int res = results[itemCount, capacity];
         var weight = capacity;
-        var selectedItems = new List<int>();   
+        var selectedItems = new List<int>();
 
         //scanning matrix from bottom up from last column
         for (item = itemCount; item > 0 && res > 0; item--)

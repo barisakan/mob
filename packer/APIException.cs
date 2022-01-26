@@ -3,10 +3,10 @@
 
 public static class Messages
 {
-    public static string MaxWeight = "Weight of an item should be <={0}";
-    public static string MaxCost = "Cost of an item should be <={0}";
-    public static string MaxItem = "Maximum {0} items can be evaluated";
-    public static string MaxBoxWeigth = "Box weight can not be more than {0}";
+    public static string MaxItemWeight = "Weight of an item excessing limits";
+    public static string MaxItemCost = "Cost of an item excessing limits";
+    public static string MaxItem = "Can not add more than maximum allowed items to the package";
+    public static string MaxPackageWeigth = "Box weight can not be more than allowed limits";
     public static string LineParsingError = "Malformatted data within file";
     public static string FileOpenError = "Error while trying to read file";
 }
