@@ -1,23 +1,24 @@
 ﻿namespace Packer.Model;
 
-public class Item
+public class Item : IItem
 {
     private int id;
     private double weight;
     private double cost;
     private double profit;
     private bool selected;
+    private IConf conf = Conf.Instance;
 
     public Item(int id, double weight, double cost)
     {
-        if (weight > 100)
+        if (weight > conf.MaxItemWeight)
         {
-            throw new APIException(Messages.MaxWeight);
+            throw new APIException(Messages.MaxItemWeight);
         }
 
-        if (cost > 100)
+        if (cost > conf.MaxItemCost)
         {
-            throw new APIException(Messages.MaxCost);
+            throw new APIException(Messages.MaxItemCost);
         }
 
         this.id = id;

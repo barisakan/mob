@@ -7,7 +7,13 @@ namespace test;
 
 public class ModelTests
 {
-    [Fact]
+
+    public ModelTests()
+    {
+        //Initializing default values for config
+        Conf.Init(100, 100, 100, 15);
+    }
+    [Fact]    
     public void ItemCreation()
     {
         var id = 1;
@@ -22,7 +28,6 @@ public class ModelTests
         Assert.Equal(cost / weight, i.Profit);
         Assert.False(i.IsSelected);
     }
-
 
     [Fact]
     public void ItemSelected()
@@ -54,7 +59,7 @@ public class ModelTests
             }
         );
 
-        Assert.Equal(Messages.MaxWeight, ex.Message);
+        Assert.Equal(Messages.MaxItemWeight, ex.Message);
     }
 
 
@@ -71,7 +76,7 @@ public class ModelTests
         }
         );
 
-        Assert.Equal(Messages.MaxCost, ex.Message);
+        Assert.Equal(Messages.MaxItemCost, ex.Message);
     }
 
     [Fact]
@@ -86,7 +91,7 @@ public class ModelTests
         }
         );
 
-        Assert.Equal(Messages.MaxBoxWeigth, ex.Message);
+        Assert.Equal(Messages.MaxPackageWeigth, ex.Message);
     }
 
     [Fact]
@@ -123,7 +128,7 @@ public class ModelTests
 
         var ex = Assert.Throws<APIException>(() =>
         {
-            var items = new List<Item>();
+            var items = new List<IItem>();
 
             for (int i = 0; i <= 15; i++)
             {
@@ -149,5 +154,30 @@ public class ModelTests
 
 
         Assert.Equal(0, pkg.Count());
+    }
+
+
+    [Fact]
+    public void ConfigOverrideWorks()
+    {
+        Conf.Init(999, 999, 999, 50);
+        var id = 1;
+        var cost = 998.99;
+        var weight = 998.99;
+        var mw = 998.99;
+
+        var items = new List<IItem>();
+
+        for (int i = 0; i <= 49; i++)
+        {
+            items.Add(new Item(id, weight, cost));
+        }
+        var pkg = new Package(mw, items);
+
+        Assert.Equal(50, pkg.Count());
+        Assert.Equal(998.99, pkg.PackageWeight);
+
+        //Restoring default config values
+        Conf.Init(100, 100, 100, 15);
     }
 }

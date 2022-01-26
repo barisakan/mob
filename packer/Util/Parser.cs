@@ -8,13 +8,10 @@ namespace Packer.Util;
 /// <summary>
 ///  Responsible for parsing file.
 /// </summary>
-public class Parser
+public class Parser : IParser
 {
-    private string filePath;
-
-    public Parser(string filePath)
+    public Parser()
     {
-        this.filePath = filePath;
     }
 
     /// <summary>
@@ -24,9 +21,9 @@ public class Parser
     /// <exception cref="APIException">
     /// Thrown when file not found, file malformatted or data within file does not meet requirements    
     /// </exception>
-    public List<Package> Read()
+    public List<IPackage> Read(string filePath)
     {
-        var records = new List<Package>();
+        var records = new List<IPackage>();
         StreamReader sr;
 
         try
@@ -47,7 +44,7 @@ public class Parser
             }
             return records;
         }
-        catch (APIException ex)
+        catch (APIException)
         {
             //throwing error without changing
             throw;
@@ -78,7 +75,7 @@ public class Parser
 
             //using regex to parse items from line
             var regex = new Regex(@"(?<item>(?<id>[0-9]+)(?>[,])(?<weight>[0-9]+[.][0-9]+)(?>[,])(?>[€])(?<cost>[0-9]+))");
-            
+
             if (regex.IsMatch(parts[1]))
             {
                 foreach (Match match in regex.Matches(parts[1]))
@@ -92,11 +89,11 @@ public class Parser
             }
             return box;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new APIException(Messages.LineParsingError, ex);
         }
-        
+
     }
 
 }

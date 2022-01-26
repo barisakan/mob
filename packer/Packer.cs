@@ -1,6 +1,5 @@
-﻿using Packer.Model;
+﻿using Packer.Strategy;
 using Packer.Util;
-using System.Text;
 
 namespace Packer;
 
@@ -9,6 +8,9 @@ namespace Packer;
 /// </summary>
 public class Packer
 {
+    //initializin config with default values
+    public static IConf cfg = Conf.Init(maxItemCost: 100, maxItemWeight: 100,maxPackageWeight: 100, maxItemCount: 15);
+
 
     /// <summary>
     /// </summary>
@@ -18,38 +20,20 @@ public class Packer
     /// Thrown when file not found, file malformatted or data within file does not meet requirements    
     /// </exception>
     public static string Pack(string filePath)
-    {
-        var sb = new StringBuilder();
+    {                                
         try
         {
-            var prs = new Parser(filePath);
-            var records = prs.Read();
+            var parser = new Parser();
+            return parser.Read(filePath)
+                         .PackAll( (p) => 
+                            {
+                                var st = new Knapsack(p);
+                                st.Calculate();
+                            })
+                         .PrintResults();            
 
-            for (int i = 0; i < records.Count; i++)
-            {
-                var record = records[i];    
-
-                var ks = new Knapsack(record.PackageWeight, record.Items);
-                ks.Calculate();
-
-                foreach (var idx in ks.SelectedItems())
-                {
-                    record.Select(idx);
-                }
-
-                if (i+1 == records.Count)
-                {
-                    //lastline does not print newline
-                    sb.Append(record.ToString());
-                }
-                else
-                {
-                    sb.AppendLine(record.ToString());
-                }
-
-            }
         }
-        catch (APIException e)
+        catch (APIException)
         {
             throw;
         }
@@ -57,6 +41,5 @@ public class Packer
         {
             throw new APIException(e);
         }
-        return sb.ToString();
     }
 }

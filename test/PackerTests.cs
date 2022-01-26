@@ -8,6 +8,10 @@ namespace test;
 public class PackerTests
 {
 
+    public PackerTests()
+    {
+
+    }
 
     [Fact]
     public void ExampleMemoryDataTest()
