@@ -39,7 +39,6 @@ Also responsible for initializing configuration object.
 Contains all implementations
 
 
-***
 ### Util.Parser
 Parser is responsible for parfing provided file.
 Firts file is opened and all lines parsed one by one.
