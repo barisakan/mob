@@ -6,3 +6,4 @@ obj
 coverage
 uml
 
+/test/coverage.opencover.xml

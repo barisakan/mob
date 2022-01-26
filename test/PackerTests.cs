@@ -1,8 +1,8 @@
-using Packer;
+using Api;
+using packer;
 using System.IO;
 using System.Text;
 using Xunit;
-
 namespace test;
 
 public class PackerTests
@@ -10,7 +10,6 @@ public class PackerTests
 
     public PackerTests()
     {
-
     }
 
     [Fact]
@@ -28,7 +27,7 @@ public class PackerTests
 
         File.WriteAllText("ExampleMemoryDataTest", input, Encoding.UTF8);
 
-        Assert.Equal(output, Packer.Packer.Pack(@".\ExampleMemoryDataTest"));
+        Assert.Equal(output, Packer.Pack(@".\ExampleMemoryDataTest"));
 
         File.Delete("ExampleMemoryDataTest");
     }
@@ -42,7 +41,7 @@ public class PackerTests
 
         var ex = Assert.Throws<APIException>(() => {
 
-            Packer.Packer.Pack(@".\ExampleWrongFormatDataTest");
+            Packer.Pack(@".\ExampleWrongFormatDataTest");
 
         });
 
@@ -58,7 +57,7 @@ public class PackerTests
 
         var ex = Assert.Throws<APIException>( () => {
 
-            var result = Packer.Packer.Pack(@".\data\some_file");
+            var result = Packer.Pack(@".\data\some_file");
 
         });
 

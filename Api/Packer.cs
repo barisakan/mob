@@ -1,7 +1,9 @@
-﻿using Packer.Strategy;
-using Packer.Util;
+﻿using packer;
+using packer.Config;
+using packer.Strategy;
+using packer.Util;
 
-namespace Packer;
+namespace Api;
 
 /// <summary>
 /// Packer parses provided file and generates string output of the calculated results
@@ -9,7 +11,7 @@ namespace Packer;
 public class Packer
 {
     //initializin config with default values
-    public static IConf cfg = Conf.Init(maxItemCost: 100, maxItemWeight: 100,maxPackageWeight: 100, maxItemCount: 15);
+    private static IConf cfg = Conf.Init(maxItemCost: 100, maxItemWeight: 100,maxPackageWeight: 100, maxItemCount: 15);
 
 
     /// <summary>

@@ -1,8 +1,8 @@
-﻿using Packer.Model;
+﻿using packer.Model;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace Packer.Util;
+namespace packer.Util;
 
 
 /// <summary>
@@ -24,7 +24,7 @@ public class Parser : IParser
     public List<IPackage> Read(string filePath)
     {
         var records = new List<IPackage>();
-        StreamReader sr;
+        StreamReader? sr = null;
 
         try
         {
@@ -42,6 +42,7 @@ public class Parser : IParser
                     }
                 }
             }
+            sr.Close();
             return records;
         }
         catch (APIException)
@@ -53,6 +54,13 @@ public class Parser : IParser
         {
             //encapsulating possible errors
             throw new APIException(Messages.FileOpenError, ex);
+        }
+        finally
+        {
+            if(sr != null)
+            {
+                sr.Close();
+            }
         }
 
     }

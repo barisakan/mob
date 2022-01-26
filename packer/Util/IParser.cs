@@ -1,9 +1,8 @@
-﻿using Packer.Model;
+﻿using packer.Model;
 
-namespace Packer.Util
+namespace packer.Util;
+
+public interface IParser
 {
-    public interface IParser
-    {
-        List<IPackage> Read(string filePath);
-    }
+    List<IPackage> Read(string filePath);
 }

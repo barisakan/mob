@@ -1,5 +1,6 @@
-﻿using Packer;
-using Packer.Model;
+﻿using packer;
+using packer.Config;
+using packer.Model;
 using System.Collections.Generic;
 using Xunit;
 
@@ -13,6 +14,7 @@ public class ModelTests
         //Initializing default values for config
         Conf.Init(100, 100, 100, 15);
     }
+
     [Fact]    
     public void ItemCreation()
     {
