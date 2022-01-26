@@ -7,3 +7,4 @@ coverage
 uml
 
 /test/coverage.opencover.xml
+/test/coverage.json
