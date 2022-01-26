@@ -2,7 +2,7 @@
 
 ## Usage
 
-``` csharp
+```csharp
     try
     {
         var results = Packer.Pack(@".\ExampleWrongFormatDataTest");
@@ -21,7 +21,7 @@ Packer is the entry point to the API.
 It contains single static method which orchestrates the flow.
 Also responsible for initializing configuration object.
 
-``` csharp
+```csharp
     var parser = new Parser();
     return parser.Read(filePath)
                     .PackAll( (p) => 
@@ -45,12 +45,12 @@ Contains all implementations
     Exceptions are thrown if parsing is not finished correcty.
     All exceptions are encapsulated under APIException.
 
-``` csharp
+```csharp
     public List<IPackage> Read(string filePath)
 ```
     I didn't used file stream within using block because I wanted to catch and capsulate system exceptions. So file stream closed manually.
 
-``` csharp
+```csharp
    private static Package ParseLine(string line)
 ```
     Used regular expressin to match items within line string and parsed them.
@@ -59,7 +59,8 @@ Contains all implementations
 
 #### Strategy.Knapsak
 
-    Kanpsak problem solved by dynamic programminc approach [Knapsak]("https://en.wikipedia.org/wiki/Knapsack_problem#Dynamic_programming_in-advance_algorithm")
+    Kanpsak problem solved by dynamic programminc approach 
+    [Knapsak](https://en.wikipedia.org/wiki/Knapsack_problem#Dynamic_programming_in-advance_algorithm)
 
     Knapsak object takes iPackage object to make calculations.
     There are two main parts :
@@ -67,9 +68,11 @@ Contains all implementations
     - Generating solution matrix
     - Finding selected items from solution matrix.
 
-    **Since weight and costs values are not integers I assumed precision will be double digits (.00) and multiplied values by 100 before processing.**
+    __Since weight and costs values are not integers I assumed precision will be double digits (.00) 
+    and multiplied values by 100 before processing.__
 
-    **This increased used memory allocation because my matrix size on weight dimension increased to 10.000 (when weight is 100)**
+    __This increased used memory allocation because my matrix size on weight dimension 
+    increased to 10.000 (when weight is 100)__
 
 
 #### Model.Package
@@ -78,11 +81,11 @@ Contains all implementations
     There are two conditions when exception is throwed :
 
     1 - Constuctor : When package weight exceeds configuration value
-``` csharp
+```csharp
     public Package(double weight)
 ```
     2 - AddItem : When max items count limit reached
-``` csharp
+```csharp
     public void AddItem(IItem i)
 ```
 
@@ -92,7 +95,7 @@ Contains all implementations
     There are two conditions when exception is throwed :
     
     1 - Constuctor : When package weight or cost exceeds configuration value
-``` csharp
+```csharp
     public Item(int id, double weight, double cost)
 ```
 
@@ -105,7 +108,7 @@ Contains all implementations
     Holds configuration values and implements singleton pattern.
     It provides static Instance method to access config instance.
 
-``` csharp
+```csharp
     public static IConf Instance
     {
         get
@@ -125,7 +128,7 @@ Contains all implementations
 
     Extension methods are added List<IPackage> type to help more fluent approach.
 
-``` csharp
+```csharp
      public static List<IPackage> PackAll(this List<IPackage> packages)
      public static List<IPackage> PackAll(this List<IPackage> packages, Action<IPackage> f)
      public static string PrintResults(this List<IPackage> packages)
@@ -136,10 +139,12 @@ Contains all implementations
     Test project tests two component
 
     1- Api tests
-    Test done by creating file from hard-coded sample data. I didn't prefer using real files since they are neede to be delivered among sourcode.
+    Test done by creating file from hard-coded sample data. 
+    I didn't prefer using real files since they are neede to be delivered among sourcode.
 
     2- Model tests
-    Model tests focus on Package and Item objects. Objects data consistency and business behavours are tested.
+    Model tests focus on Package and Item objects. 
+    Objects data consistency and business behavours are tested.
 
 ### Class Diagram
 
