@@ -1,7 +1,7 @@
-﻿using Packer.Model;
+﻿using packer.Model;
 using System.Diagnostics;
 
-namespace Packer.Strategy;
+namespace packer.Strategy;
 
 public class Knapsack : IKnapsack
 {
@@ -18,7 +18,12 @@ public class Knapsack : IKnapsack
     private int[,] results;
 
 
-
+    /// <summary>
+    /// Handles packaging operation of the package.
+    /// Uses dynamic programming technique to resolve optimum items.
+    /// Items are ordered according to cost/weight to make most profitable choice.
+    /// </summary>
+    /// <param name="package">Package item</param>
     public Knapsack(IPackage package)
     {
         this.package = package;
@@ -50,6 +55,9 @@ public class Knapsack : IKnapsack
     }
 
 
+    /// <summary>
+    /// Creates selection matrix for package items
+    /// </summary>
     private void FillMatrix()
     {
         int item, weight;
@@ -79,6 +87,9 @@ public class Knapsack : IKnapsack
 
     }
 
+    /// <summary>
+    /// Scans generated matrix and determines selected items by traversing matrix from bottom up.
+    /// </summary>
     private void FindSelectedItems()
     {
         int item;

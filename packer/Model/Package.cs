@@ -1,5 +1,10 @@
-﻿namespace Packer.Model;
+﻿using packer.Config;
 
+namespace packer.Model;
+
+/// <summary>
+/// Stores package information to be packed.
+/// </summary>
 public class Package : IPackage
 {
 
@@ -7,6 +12,11 @@ public class Package : IPackage
     private List<IItem> items;
     private IConf conf = Conf.Instance;
 
+    /// <summary>
+    /// Creates new package object with maximum weight
+    /// </summary>
+    /// <param name="weight">Maximum weight of the package</param>
+    /// <exception cref="APIException">Throws exception if weight exceeds value which is defined within config </exception>
     public Package(double weight)
     {
         if (weight > conf.MaxPackageWeight)
@@ -26,6 +36,11 @@ public class Package : IPackage
         }
     }
 
+    /// <summary>
+    /// Adds ne item to package
+    /// </summary>
+    /// <param name="i"></param>
+    /// <exception cref="APIException">Throws exception if maximum number of items exceeded</exception>
     public void AddItem(IItem i)
     {
         //Items heavier than package capacity are discarded
@@ -73,6 +88,10 @@ public class Package : IPackage
         return str;
     }
 
+    /// <summary>
+    /// Marks item within Item list as selected.
+    /// </summary>
+    /// <param name="id">Item id</param>
     public void Select(int id)
     {
 

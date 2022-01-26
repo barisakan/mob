@@ -1,8 +1,8 @@
-﻿using Packer.Model;
-using Packer.Strategy;
+﻿using packer.Model;
+using packer.Strategy;
 using System.Text;
 
-namespace Packer;
+namespace packer;
 
 public static class ListExtension
 {
@@ -22,7 +22,13 @@ public static class ListExtension
         return packages;
     }
 
-    public static List<IPackage> PackAll(this List<IPackage> packages,Action<IPackage> f)
+    /// <summary>
+    /// Provides extension point for future updates. If necessary different algorithm can be applied 
+    /// </summary>
+    /// <param name="packages"></param>
+    /// <param name="f">PArameterless function to be executed</param>
+    /// <returns>List<IPackage></returns>
+    public static List<IPackage> PackAll(this List<IPackage> packages, Action<IPackage> f)
     {
         foreach (var package in packages)
         {

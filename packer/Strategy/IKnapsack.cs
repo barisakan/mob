@@ -1,4 +1,4 @@
-﻿namespace Packer.Strategy;
+﻿namespace packer.Strategy;
 
 public interface IKnapsack
 {

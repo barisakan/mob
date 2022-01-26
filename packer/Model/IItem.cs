@@ -1,13 +1,12 @@
-﻿namespace Packer.Model
-{
-    public interface IItem
-    {
-        double Cost { get; }
-        int Id { get; }
-        bool IsSelected { get; }
-        double Profit { get; }
-        double Weight { get; }
+﻿namespace packer.Model;
 
-        void Select();
-    }
+public interface IItem
+{
+    double Cost { get; }
+    int Id { get; }
+    bool IsSelected { get; }
+    double Profit { get; }
+    double Weight { get; }
+
+    void Select();
 }

@@ -1,5 +1,10 @@
-﻿namespace Packer.Model;
+﻿using packer.Config;
 
+namespace packer.Model;
+
+/// <summary>
+/// Item
+/// </summary>
 public class Item : IItem
 {
     private int id;
@@ -9,6 +14,13 @@ public class Item : IItem
     private bool selected;
     private IConf conf = Conf.Instance;
 
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="id">Id of the item</param>
+    /// <param name="weight">Weight of the item</param>
+    /// <param name="cost">Cost of the item</param>
+    /// <exception cref="APIException"></exception>
     public Item(int id, double weight, double cost)
     {
         if (weight > conf.MaxItemWeight)

@@ -1,14 +1,11 @@
-﻿
-namespace Packer.Model
-{
-    public interface IPackage
-    {
-        IReadOnlyList<IItem> Items { get; }
-        double PackageWeight { get; }
+﻿namespace packer.Model;
 
-        void AddItem(IItem i);
-        int Count();
-        void Select(int id);
-        string ToString();
-    }
+public interface IPackage
+{
+    IReadOnlyList<IItem> Items { get; }
+    double PackageWeight { get; }
+    void AddItem(IItem i);
+    int Count();
+    void Select(int id);
+    string ToString();
 }
