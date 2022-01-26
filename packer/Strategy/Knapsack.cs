@@ -1,6 +1,7 @@
-﻿using System.Diagnostics;
+﻿using Packer.Model;
+using System.Diagnostics;
 
-namespace Packer.Model;
+namespace Packer.Strategy;
 
 public class Knapsack : IKnapsack
 {
@@ -21,19 +22,19 @@ public class Knapsack : IKnapsack
     public Knapsack(IPackage package)
     {
         this.package = package;
-        this.items = package.Items.OrderByDescending(i => i.Profit).ToList();
+        items = package.Items.OrderByDescending(i => i.Profit).ToList();
 
-        this.capacity = Convert.ToInt32(package.PackageWeight * precision);
-        this.itemCount = items.Count();
+        capacity = Convert.ToInt32(package.PackageWeight * precision);
+        itemCount = items.Count();
 
 
-        this.weights = new int[itemCount];
+        weights = new int[itemCount];
         for (int i = 0; i < itemCount; i++)
         {
             weights[i] = Convert.ToInt32(items[i].Weight * precision);
         }
 
-        this.costs = new int[itemCount];
+        costs = new int[itemCount];
         for (int i = 0; i < itemCount; i++)
         {
             costs[i] = Convert.ToInt32(items[i].Cost * precision);

@@ -1,4 +1,5 @@
-﻿using Packer.Util;
+﻿using Packer.Strategy;
+using Packer.Util;
 
 namespace Packer;
 
@@ -24,7 +25,11 @@ public class Packer
         {
             var parser = new Parser();
             return parser.Read(filePath)
-                         .PackAll()
+                         .PackAll( (p) => 
+                            {
+                                var st = new Knapsack(p);
+                                st.Calculate();
+                            })
                          .PrintResults();            
 
         }

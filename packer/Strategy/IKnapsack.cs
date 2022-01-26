@@ -1,7 +1,6 @@
-﻿namespace Packer.Model
+﻿namespace Packer.Strategy;
+
+public interface IKnapsack
 {
-    public interface IKnapsack
-    {
-        void Calculate();
-    }
+    void Calculate();
 }

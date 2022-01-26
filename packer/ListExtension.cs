@@ -1,4 +1,5 @@
 ﻿using Packer.Model;
+using Packer.Strategy;
 using System.Text;
 
 namespace Packer;
@@ -15,9 +16,17 @@ public static class ListExtension
     {
         foreach (var package in packages)
         {
-
             var st = new Knapsack(package);
             st.Calculate();
+        }
+        return packages;
+    }
+
+    public static List<IPackage> PackAll(this List<IPackage> packages,Action<IPackage> f)
+    {
+        foreach (var package in packages)
+        {
+            f.Invoke(package);
         }
         return packages;
     }
