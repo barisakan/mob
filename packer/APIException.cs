@@ -8,6 +8,7 @@ public static class Messages
     public static string MaxItem = "Maximum 15 items can be evaluated";
     public static string MaxBoxWeigth = "Box weight can not be more than 100";
     public static string LineParsingError = "Malformatted data within file";
+    public static string FileOpenError = "Error while trying to read file";
 }
 
 public class APIException : Exception

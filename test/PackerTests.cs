@@ -58,6 +58,6 @@ public class PackerTests
 
         });
 
-        Assert.Equal(typeof(APIException), ex.GetType());
+        Assert.Equal(Messages.FileOpenError, ex.Message);
     }
 }
