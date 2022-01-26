@@ -59,7 +59,7 @@ Contains all implementations
 
 #### Strategy.Knapsak
 
-    Kanpsak problem solved by dynamic programminc approach [Knapsak](https://en.wikipedia.org/wiki/Knapsack_problem#Dynamic_programming_in-advance_algorithm)
+    Kanpsak problem solved by dynamic programminc approach [Knapsak]("https://en.wikipedia.org/wiki/Knapsack_problem#Dynamic_programming_in-advance_algorithm")
 
     Knapsak object takes iPackage object to make calculations.
     There are two main parts :
