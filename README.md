@@ -1,5 +1,21 @@
 # Packer Library
 
+# Notes
+
+* Makefile only works for windows platform
+
+To build 
+
+```csharp
+    dotnet build
+```
+
+Testing
+
+```csharp
+    dotnet test /p:CollectCoverage=true
+```
+
 # Usage
 
 ```csharp
